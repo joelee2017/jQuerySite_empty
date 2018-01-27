@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<style>
+/*.simpleTable {
+	border: 1px solid green;
+	width: 300px;
+	border-collapse: collapse;
+    text-align:center;
+}
+
+.simpleTable td, .simpleTable th {
+	border: 1px solid green;
+	padding: 10px;
+}*/
+
+</style>
+
+</head>
+<body>
+    <header class="container"></header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <nav></nav>
+            </div>
+            <div class="col-md-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">jQuery Selectors</div>
+                    <div class="panel-body">
+                        <!-- 每頁不同的內容從這裡開始 -->
+                        <a href="a.doc">A(doc)</a> |
+                        <a href="a.pdf">A(pdf)</a> <br />
+                        <a href="b.doc">B(doc)</a> |
+                        <a href="b.pdf">B(pdf)</a>
+
+                        <hr />
+
+                        <input type="text" value="請輸入" /><br />
+                        <input type="text" value="請輸入" /><br />
+                        <input type="text" value="請輸入" /><br />
+                        <input type="button" value="送出" />
+                        <hr />
+
+                        <table class="simpleTable">
+                            <thead>
+                                <tr>
+                                    <th>001</th>
+                                    <th>002</th>
+                                    <th>003</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>A0</td>
+                                    <td>B1</td>
+                                    <td>C2</td>
+                                </tr>
+                                <tr>
+                                    <td>D3</td>
+                                    <td>E4</td>
+                                    <td>F5</td>
+                                </tr>
+                                <tr>
+                                    <td>G6</td>
+                                    <td>H7</td>
+                                    <td>I8</td>
+                                </tr>
+                                <tr>
+                                    <td>A0</td>
+                                    <td>B1</td>
+                                    <td>C2</td>
+                                </tr>
+                                <tr>
+                                    <td>D3</td>
+                                    <td>E4</td>
+                                    <td>F5</td>
+                                </tr>
+                                <tr>
+                                    <td>G6</td>
+                                    <td>H7</td>
+                                    <td>I8</td>
+                                </tr>
+                                <tr>
+                                    <td>A0</td>
+                                    <td>B1</td>
+                                    <td>C2</td>
+                                </tr>
+                                <tr>
+                                    <td>D3</td>
+                                    <td>E4</td>
+                                    <td>F5</td>
+                                </tr>
+                                <tr>
+                                    <td>G6</td>
+                                    <td>H7</td>
+                                    <td>I8</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <!-- 每頁不同的內容到這裡結束 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="section" class="row"></div>
+        <footer class="footer"></footer>
+
+    </div>
+
+    <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('header').load('partial/header.html');
+            $('nav').load('partial/nav.html');
+            $('#section').load('partial/section.html');
+            $('footer').load('partial/footer.html');
+
+            //==== Attribute Selectors ====
+            //在pdf及doc的超連結前面加上小圖
+            //css 參考用法如下
+            //text-decoration:none
+            //background:url(Images/pdf_icon.gif) no-repeat
+            //padding-left:20px
+
+            $('a[href$="doc"]').css({
+                'background': 'url(images/word_icon.gif) no-repeat', //no-repeat 圖不重複
+                'padding-left':'20px'
+            })
+
+            $('a[href$="pdf"]').css({
+                'background': 'url(images/pdf_icon.gif) no-repeat',
+                'padding-left':'20px'
+            })
+            //=============================
+            $('.simpleTable').css({
+                'border': '1px solid green',
+                'width': '300px',
+                'text-align': 'center'
+            })
+            $('.simpleTable>tbody>tr>td, .simpleTable th').css({  //空格選取元素下的所有元素
+                                                                  //> 選取元素下一個元素
+                'border': '1px solid green',
+                'width': '10px',
+                'text-align':'center'
+            })
+
+            //==== Basic Filter Selectors ====
+            ////根據索引值,找到要控制的元素(標籤)
+            ////練習一
+            ////將E4的背景色，設定成紫色 background-color:purple
+            //$('.simpleTable td:eq(4)').css('background-color','purple')//eq 等於 =
+            ////將A0-C2的背景色，設定成黃色 background-color:yellow
+            //$('.simpleTable td:lt(3)').css('background-color','yellow')//lt 小於 <
+            ////將G6-I8的背景色，設定成橘色 background-color:orange
+            //$('.simpleTable td:gt(5)').css('background-color','orange')//gt 大於 >
+
+            ////練習二
+            ////先將上面的練習都注解掉
+            ////將偶數格A0,C2,E4,G6,I8的背景色，設定成黃色 background-color:yellow
+            //$('.simpleTable td:even').css('color','#3D7878')//even 偶數
+            ////將數格B1,D3,F5,H7的背景色，設定成橘色 background-color:orange
+            //$('.simpleTable td:odd').css('color','#984B4B')//odd 奇數
+            //=============================
+
+            //==== Child Filter Selectors ===========
+            //跟父元素有關，與索引值無關 (1) 直接表示第一位
+            //$('.simpleTable td:first-child').css('background-color', 'yellow') //左
+            //$('.simpleTable td:last-child').css('background-color', '	#4F9D9D')//右
+            //$('.simpleTable td:nth-child(2)').css('background-color', '	pink')//中
+            //$('.simpleTable>tbody>tr:nth-child(2n)').css('background-color', '	#EA7500')//偶數列
+            //$('.simpleTable>tbody>tr:nth-child(2n+1)').css('background-color', '#d0d0d0')//奇數列
+            $('.simpleTable>tbody>tr:nth-child(even)').css('background-color', '#007979')
+            $('.simpleTable>tbody>tr:nth-child(odd)').css('background-color', '#FF8040')
+            $('.simpleTable>tbody>tr:nth-child(3N+1)').css('background-color', '#9999CC')
+            //=============================
+
+
+        });
+
+        var g1 = { 'background-color': 'lightgreen', 'color': '#AE0000', 'text-allign': 'center' }
+        var g2 = { 'background-color': '#9D9D9D', 'color': '#FFDC35', 'text-allign': 'center' }
+
+        $('input[type="text"]').focus(function () {
+            $(this).css('background-color', 'lightgreen')
+            $(this).val("");
+        }).blur(function () {
+            $(this).css('background-color', '#9D9D9D')
+            $(this).val("請輸入");
+        })
+
+
+
+        //$(document).ready(function () {
+        //    $('input:text').css(g1)
+        //        .focusin(fin)
+        //        .focusout(fout);    
+        //    function fin() {
+        //        $(this).css(g1)
+        //    }
+        //    function fout() {
+        //        $(this).css(g2)
+        //    }
+        //});
+
+    </script>
+
+
+</body>
+
+</html>

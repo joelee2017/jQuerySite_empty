@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+
+</head>
+<body>
+    <header class="container"></header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <nav></nav>
+            </div>
+            <div class="col-md-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">jQuery writing style</div>
+                    <div class="panel-body">
+                        <!-- 每頁不同的內容從這裡開始 -->
+                        <h1>write less, do more</h1>
+                        <h1>write less, do more</h1>
+                        <h1>write less, do more</h1>
+                        <h1>write less, do more</h1>
+                        <h1>write less, do more</h1>
+                        <!-- 每頁不同的內容到這裡結束 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="section" class="row"></div>
+        <footer class="footer"></footer>
+
+    </div>
+
+
+    <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('header').load('partial/header.html');
+            $('nav').load('partial/nav.html');
+            $('#section').load('partial/section.html');
+            $('footer').load('partial/footer.html');
+
+            //看到selectors重複時... Chaining 鏈式語法(合併)
+
+            var q1 = { 'background-color': 'lightgreen', 'color': 'purple', 'padding': '10px', 'text-allign': 'center' }
+            var q2 = { 'background-color': '#BB3D00', 'color': '#616130', 'padding': '20px', 'text-allign': 'center' }
+            $('h1').css(q1)
+                .mousemove(over)
+                .mouseleave(leave);
+
+            //看到jQuery的方法重複使用時
+
+            //$('h1').css('background-color', 'lightgreen')
+            //$('h1').mousemove(over)
+            //$('h1').mouseleave(leave)
+
+            //事件處理程序 this表示觸發事件的物件 javascript物件
+                //console.log(this)
+                //this(js) vs  $(this)(jq)
+                //錯誤寫法
+                //this.css('background-color', 'lightgreen')
+                //JS
+                //this.style.background-color-lightgreen;
+                //JQ  $(....) 就是把....轉成JQ物件，之後才能用JQ物件所提供的方法
+
+            function over() {                
+                $(this).css(q2)
+            }
+
+            function leave() {
+                $(this).css(q1)
+            }
+            
+        });
+
+        //JS  DOM會有效能的問題
+        //var hs = document.querySelectorAll('h1');
+        //for (var i = 0, max = hs.length; i < max; i++){
+        //    hs[i].style.color = "green"
+        //    hs[i].addEventListener("mousemove", function () {
+        //        this.style.color ="red"
+        //    })
+        //    hs[i].addEventListener("mouseout", function () {
+        //        this.style.color = "green"
+        //    })
+        //}
+    </script>
+</body>
+
+</html>
